@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block contenido %}
+<h2 class="mb-4">Bienvenido, {{ session.nombre }}</h2>
+<div class="row g-3">
+    <div class="col-md-3">
+        <div class="card text-bg-primary"><div class="card-body">
+            <div class="small">Productos activos</div>
+            <div class="fs-2 fw-bold">{{ resumen.productos }}</div>
+        </div></div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-bg-success"><div class="card-body">
+            <div class="small">Clientes</div>
+            <div class="fs-2 fw-bold">{{ resumen.clientes }}</div>
+        </div></div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-bg-warning"><div class="card-body">
+            <div class="small">Cotizaciones pendientes</div>
+            <div class="fs-2 fw-bold">{{ resumen.pendientes }}</div>
+        </div></div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-bg-dark"><div class="card-body">
+            <div class="small">Total vendido</div>
+            <div class="fs-2 fw-bold">${{ "{:,.0f}".format(resumen.ventas) }}</div>
+        </div></div>
+    </div>
+</div>
+{% endblock %}

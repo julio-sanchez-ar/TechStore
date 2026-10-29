@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block contenido %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Productos</h2>
+    {% if session.rol == 'Admin' %}
+        <a href="{{ url_for('producto_nuevo') }}" class="btn btn-primary">+ Nuevo producto</a>
+    {% endif %}
+</div>
+
+<table class="table table-striped table-hover bg-white shadow-sm">
+    <thead class="table-primary">
+        <tr>
+            <th>Nombre</th><th>Categoría</th><th>Tipo</th>
+            <th class="text-end">Precio</th><th class="text-end">Stock</th>
+            {% if session.rol == 'Admin' %}<th></th>{% endif %}
+        </tr>
+    </thead>
+    <tbody>
+    {% for p in productos %}
+        <tr>
+            <td>{{ p.nombre }}</td>
+            <td>{{ p.categoria }}</td>
+            <td><span class="badge {{ 'bg-info' if p.tipo == 'Licencia' else 'bg-secondary' }}">{{ p.tipo }}</span></td>
+            <td class="text-end">${{ "{:,.0f}".format(p.precio) }}</td>
+            <td class="text-end">{{ p.stock }}</td>
+            {% if session.rol == 'Admin' %}
+            <td class="text-end">
+                <a href="{{ url_for('producto_editar', id=p.id_producto) }}" class="btn btn-sm btn-outline-primary">Editar</a>
+                <form method="post" action="{{ url_for('producto_desactivar', id=p.id_producto) }}" class="d-inline"
+                      onsubmit="return confirm('¿Desactivar este producto?')">
+                    <button class="btn btn-sm btn-outline-danger">Desactivar</button>
+                </form>
+            </td>
+            {% endif %}
+        </tr>
+    {% else %}
+        <tr><td colspan="6" class="text-center text-muted">No hay productos.</td></tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
