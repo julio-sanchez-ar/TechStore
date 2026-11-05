@@ -1,5 +1,8 @@
 {
     "python-envs.defaultEnvManager": "ms-python.python:venv",
     "python.defaultInterpreterPath": "${workspaceFolder}/techstore/venv/Scripts/python.exe",
-    "python.analysis.extraPaths": ["${workspaceFolder}/techstore"]
+    "python.analysis.extraPaths": ["${workspaceFolder}/techstore"],
+    "gitdoc.autoPush": "onCommit",
+    "gitdoc.autoCommitDelay": 30000,
+    "gitdoc.enabled": true
 }
